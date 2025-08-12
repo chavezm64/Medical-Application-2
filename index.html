@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Senior-Friendly Medical Application Form</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen text-gray-800">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl">
+    <h1 class="text-3xl font-bold mb-8 text-center">Easy Medical Form for Seniors</h1>
+    <p class="text-center mb-8 text-xl">This form is designed to be simple and helpful. Take your time. We'll guide you step by step.</p>
+    
+    <div class="relative mb-8">
+      <div class="bg-gray-200 h-2 rounded">
+        <div id="progress" class="progress-bar w-0 rounded"></div>
+      </div>
+    </div>
+    
+    <form id="medicalForm">
+      <!-- Step 1: Personal Information -->
+      <div id="step-1" class="step active">
+        <h2 class="text-2xl font-semibold mb-6">Step 1: About You</h2>
+        <div class="mb-6">
+          <label for="fullName">Your Full Name</label>
+          <input type="text" id="fullName" class="w-full border rounded" required aria-describedby="nameHelp">
+          <p id="nameHelp" class="text-sm text-gray-600">Example: John Doe</p>
+        </div>
+        <div class="mb-6">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" class="w-full border rounded" required>
+        </div>
+        <div class="mb-6">
+          <label for="gender">Gender</label>
+          <select id="gender" class="w-full border rounded" required>
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
+        </div>
+        <button type="button" onclick="nextStep(2)" class="w-full bg-blue-500 text-white rounded hover:bg-blue-600">Next</button>
+      </div>
+      
+      <!-- Step 2: Contact Information -->
+      <div id="step-2" class="step">
+        <h2 class="text-2xl font-semibold mb-6">Step 2: How to Reach You</h2>
+        <div class="mb-6">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" class="w-full border rounded" required aria-describedby="phoneHelp">
+          <p id="phoneHelp" class="text-sm text-gray-600">Example: 123-456-7890</p>
+        </div>
+        <div class="mb-6">
+          <label for="email">Email Address (optional)</label>
+          <input type="email" id="email" class="w-full border rounded">
+        </div>
+        <div class="mb-6">
+          <label for="address">Home Address</label>
+          <textarea id="address" class="w-full border rounded" rows="4"></textarea>
+        </div>
+        <div class="flex justify-between">
+          <button type="button" onclick="prevStep(1)" class="bg-gray-300 text-gray-800 rounded hover:bg-gray-400 px-4">Back</button>
+          <button type="button" onclick="nextStep(3)" class="bg-blue-500 text-white rounded hover:bg-blue-600 px-4">Next</button>
+        </div>
+      </div>
+      
+      <!-- Step 3: Medical History -->
+      <div id="step-3" class="step">
+        <h2 class="text-2xl font-semibold mb-6">Step 3: Your Health History</h2>
+        <div class="mb-6">
+          <label for="conditions">Any Past or Current Health Conditions? (e.g., diabetes, heart issues)</label>
+          <textarea id="conditions" class="w-full border rounded" rows="4" aria-describedby="conditionsHelp"></textarea>
+          <p id="conditionsHelp" class="text-sm text-gray-600">List any illnesses you've had. It's okay if none.</p>
+        </div>
+        <div class="mb-6">
+          <label for="allergies">Allergies? (e.g., to medicines, foods)</label>
+          <textarea id="allergies" class="w-full border rounded" rows="4"></textarea>
+        </div>
+        <div class="mb-6">
+          <label for="surgeries">Any Surgeries or Hospital Stays?</label>
+          <textarea id="surgeries" class="w-full border rounded" rows="4"></textarea>
+        </div>
+        <div class="flex justify-between">
+          <button type="button" onclick="prevStep(2)" class="bg-gray-300 text-gray-800 rounded hover:bg-gray-400 px-4">Back</button>
+          <button type="button" onclick="nextStep(4)" class="bg-blue-500 text-white rounded hover:bg-blue-600 px-4">Next</button>
+        </div>
+      </div>
+      
+      <!-- Step 4: Current Health -->
+      <div id="step-4" class="step">
+        <h2 class="text-2xl font-semibold mb-6">Step 4: How Are You Feeling Today?</h2>
+        <div class="mb-6">
+          <label for="symptoms">Current Symptoms or Concerns</label>
+          <textarea id="symptoms" class="w-full border rounded" rows="4" aria-describedby="symptomsHelp"></textarea>
+          <p id="symptomsHelp" class="text-sm text-gray-600">Describe any pain, tiredness, or other issues.</p>
+        </div>
+        <div class="mb-6">
+          <label for="painLevel">Pain Level (0-10, 0=no pain)</label>
+          <input type="number" id="painLevel" min="0" max="10" class="w-full border rounded">
+        </div>
+        <div class="mb-6">
+          <label>Do You Smoke?</label>
+          <div class="flex space-x-4">
+            <label><input type="radio" name="smoke" value="Yes"> Yes</label>
+            <label><input type="radio" name="smoke" value="No"> No</label>
+            <label><input type="radio" name="smoke" value="Quit"> Quit</label>
+          </div>
+        </div>
+        <div class="flex justify-between">
+          <button type="button" onclick="prevStep(3)" class="bg-gray-300 text-gray-800 rounded hover:bg-gray-400 px-4">Back</button>
+          <button type="button" onclick="nextStep(5)" class="bg-blue-500 text-white rounded hover:bg-blue-600 px-4">Next</button>
+        </div>
+      </div>
+      
+      <!-- Step 5: Medications -->
+      <div id="step-5" class="step">
+        <h2 class="text-2xl font-semibold mb-6">Step 5: Your Medicines</h2>
+        <div class="mb-6">
+          <label for="medications">List Your Current Medications (name, dose, how often)</label>
+          <textarea id="medications" class="w-full border rounded" rows="6" aria-describedby="medsHelp"></textarea>
+          <p id="medsHelp" class="text-sm text-gray-600">Example: Aspirin, 81mg, once a day.</p>
+        </div>
+        <div class="mb-6">
+          <label for="supplements">Any Vitamins or Supplements?</label>
+          <textarea id="supplements" class="w-full border rounded" rows="4"></textarea>
+        </div>
+        <div class="flex justify-between">
+          <button type="button" onclick="prevStep(4)" class="bg-gray-300 text-gray-800 rounded hover:bg-gray-400 px-4">Back</button>
+          <button type="button" onclick="nextStep(6)" class="bg-blue-500 text-white rounded hover:bg-blue-600 px-4">Next</button>
+        </div>
+      </div>
+      
+      <!-- Step 6: Emergency Contacts -->
+      <div id="step-6" class="step">
+        <h2 class="text-2xl font-semibold mb-6">Step 6: Who to Call in Emergency</h2>
+        <div class="mb-6">
+          <label for="emergencyName">Contact's Full Name</label>
+          <input type="text" id="emergencyName" class="w-full border rounded" required>
+        </div>
+        <div class="mb-6">
+          <label for="emergencyRelation">Relationship to You (e.g., spouse, child)</label>
+          <input type="text" id="emergencyRelation" class="w-full border rounded" required>
+        </div>
+        <div class="mb-6">
+          <label for="emergencyPhone">Contact's Phone Number</label>
+          <input type="tel" id="emergencyPhone" class="w-full border rounded" required>
+        </div>
+        <div class="flex justify-between">
+          <button type="button" onclick="prevStep(5)" class="bg-gray-300 text-gray-800 rounded hover:bg-gray-400 px-4">Back</button>
+          <button type="button" onclick="nextStep(7)" class="bg-blue-500 text-white rounded hover:bg-blue-600 px-4">Next</button>
+        </div>
+      </div>
+      
+      <!-- Step 7: Review and Submit -->
+      <div id="step-7" class="step">
+        <h2 class="text-2xl font-semibold mb-6">Step 7: Review and Submit</h2>
+        <p class="mb-6">Please check your information below. If everything looks good, click Submit.</p>
+        <div id="reviewSummary" class="bg-gray-100 p-4 rounded mb-6 text-lg"></div>
+        <div class="mb-6">
+          <label class="flex items-center">
+            <input type="checkbox" id="consent" required class="mr-2">
+            I consent to sharing this information with my doctor.
+          </label>
+        </div>
+        <div class="flex justify-between">
+          <button type="button" onclick="prevStep(6)" class="bg-gray-300 text-gray-800 rounded hover:bg-gray-400 px-4">Back</button>
+          <button type="button" id="submitBtn" class="bg-green-500 text-white rounded hover:bg-green-600 px-4">Submit</button>
+        </div>
+      </div>
+    </form>
+    
+    <div id="successMessage" class="hidden text-green-600 text-center mt-8 text-2xl">
+      Thank you! Your form has been submitted successfully. A staff member will assist you soon.
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
